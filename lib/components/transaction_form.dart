@@ -50,15 +50,32 @@ class _TransactionFormState extends State<TransactionForm> {
                 labelText: 'Valor R\$',
               ),
             ),
+            Container(
+              height: 70,
+              child: Row(
+                children: [
+                  const Text('Nenhuma data Selecionada'),
+                  FlatButton(
+                    textColor: Theme.of(context).primaryColor,
+                    onPressed: () {},
+                    child: const Text(
+                      'Selecionar data',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                RaisedButton(
                   onPressed: _submitForm,
                   child: const Text(
                     'Nova Transação',
-                    style: TextStyle(color: Colors.purple),
                   ),
+                  color: Theme.of(context).primaryColor,
+                  textColor: Theme.of(context).textTheme.button!.color,
                 ),
               ],
             )
