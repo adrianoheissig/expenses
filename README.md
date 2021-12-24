@@ -1,16 +1,16 @@
-# expenses
+# Despesas pessoais
 
-A new Flutter project.
+Projeto de Despesas Pessoais em Flutter
 
-## Getting Started
+## Sobre o Projeto
 
-This project is a starting point for a Flutter application.
+Esse projeto foi desenvolvido em flutter com o objetivo de utilizar os Widgets básicos, comunicação direta e indireta entre os componentes,
+criar classes adaptativas para as diferentes plataformas (IOS e Android).
 
-A few resources to get you started if this is your first Flutter project:
+## Nível de dificuldade
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+É necessário um conhecimento intermediário em DART e no Framework Flutter para entender o funcionamento do projeto.
 
-For help getting started with Flutter, view our
+Abaixo você pode consultar a documentação online do flutter.
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.

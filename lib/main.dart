@@ -14,23 +14,6 @@ import 'package:expenses/components/chart.dart';
 
 void main() => runApp(ExpensesApp());
 
-// return Platform.isIOS
-//         ? CupertinoPageScaffold(
-//             navigationBar: CupertinoNavigationBar(
-//               middle: Text('Despesas Pessoais'),
-//               trailing: Row(
-//                 mainAxisSize: MainAxisSize.min,
-//                 children: actions,
-//               ),
-//             ),
-//             child: bodyPage,
-//           )
-
-// Widget _getIconButton(IconData icon, Function() fn) {
-//     return Platform.isIOS
-//         ? GestureDetector(onTap: fn, child: Icon(icon))
-//         : IconButton(icon: Icon(icon), onPressed: fn);
-//   }
 class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -153,7 +136,6 @@ class _MyHomeState extends State<MyHome> {
     final bodyPage = SafeArea(
       child: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // if (isLandscape)
