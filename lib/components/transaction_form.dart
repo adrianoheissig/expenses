@@ -1,9 +1,12 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:expenses/components/adaptative_button.dart';
+import 'package:expenses/components/adaptative_text_field.dart';
+import 'package:expenses/components/adaptative_date_picker.dart';
 
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double) onAddTransaction;
+  final void Function(String, double, DateTime) onAddTransaction;
 
   const TransactionForm(this.onAddTransaction);
 
@@ -12,74 +15,63 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
-  final titleController = TextEditingController();
-
-  final valueController = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
+  final _titleController = TextEditingController();
+  final _valueController = TextEditingController();
 
   _submitForm() {
-    final title = titleController.text;
-    final value = double.tryParse(valueController.text) ?? 0.0;
+    final title = _titleController.text;
+    final value = double.tryParse(_valueController.text) ?? 0.0;
 
     if (title.isEmpty || value <= 0.0) {
       return;
     }
 
-    widget.onAddTransaction(title, value);
+    widget.onAddTransaction(title, value, _selectedDate);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleController,
-              onSubmitted: (value) => _submitForm(),
-              decoration: const InputDecoration(
-                labelText: 'Título',
+    return SingleChildScrollView(
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            right: 10,
+            left: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            children: [
+              AdaptativeTextField(
+                controller: _titleController,
+                onSubmitted: (value) => _submitForm(),
+                label: 'Título',
               ),
-            ),
-            TextField(
-              controller: valueController,
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (value) => _submitForm(),
-              decoration: const InputDecoration(
-                labelText: 'Valor R\$',
+              AdaptativeTextField(
+                controller: _valueController,
+                onSubmitted: (value) => _submitForm(),
+                label: 'Valor R\$',
+                textInputType:
+                    const TextInputType.numberWithOptions(decimal: true),
               ),
-            ),
-            Container(
-              height: 70,
-              child: Row(
+              //Novo Componente
+              AdaptativeDatePicker(
+                  selectedDate: _selectedDate,
+                  onDateChange: (newDate) {
+                    setState(() {
+                      _selectedDate = newDate;
+                    });
+                  }),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Text('Nenhuma data Selecionada'),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: () {},
-                    child: const Text(
-                      'Selecionar data',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  AdaptativeButton(
+                      label: 'Nova Transação', onPressed: _submitForm)
                 ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                RaisedButton(
-                  onPressed: _submitForm,
-                  child: const Text(
-                    'Nova Transação',
-                  ),
-                  color: Theme.of(context).primaryColor,
-                  textColor: Theme.of(context).textTheme.button!.color,
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
